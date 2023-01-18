@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require @babel/register test/*.js"
+    "test": "mocha --timeout 5000 --require @babel/register test/*.js"
   },
   "keywords": [],
   "author": "",

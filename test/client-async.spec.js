@@ -22,15 +22,16 @@ describe("Client Async", () => {
   it("Should return me a error if the page does not exist asychronously", (done) => {
     client.getPage(-99, (response) => {
       response.header.should.have.property("error", "Page does not exist");
-    });
 
-    client.getPage(0, (response) => {
-      response.header.should.have.property("error", "Page does not exist");
-    });
+      client.getPage(NUMBER_OF_PAGE + 99, (response) => {
+        response.header.should.have.property("error", "Page does not exist");
 
-    client.getPage(NUMBER_OF_PAGE + 99, (response) => {
-      response.header.should.have.property("error", "Page does not exist");
+        client.getPage(0, (response) => {
+          response.header.should.have.property("error", "Page does not exist");
+
+          done();
+        });
+      });
     });
-    done();
   });
 });
