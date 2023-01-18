@@ -1,4 +1,5 @@
 import { should } from "chai";
+import { describe, it } from "mocha";
 import Client from "../src/Client.js";
 should();
 describe("Client", () => {

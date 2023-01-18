@@ -5,12 +5,15 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require @babel/register test/*.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/register": "^7.18.9",
+    "babel-register": "^6.26.0",
     "chai": "^4.3.7",
     "eslint": "^8.32.0",
     "eslint-config-airbnb": "^19.0.4",
