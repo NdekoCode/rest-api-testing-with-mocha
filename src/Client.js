@@ -10,5 +10,20 @@ export default class Client {
         },
       };
     }
+    const hasNextPage = pageNumber < this.numberOfPages;
+    if (hasNextPage) {
+      return {
+        header: {
+          pageNumber,
+          hasNextPage,
+        },
+      };
+    }
+    return {
+      header: {
+        pageNumber,
+        hasNextPage,
+      },
+    };
   }
 }
