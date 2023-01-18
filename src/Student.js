@@ -14,6 +14,6 @@ export default class Student {
     setTimeout(() => {
       this.age++;
       cb(this.age);
-    }, 1000);
+    }, 100);
   }
 }
