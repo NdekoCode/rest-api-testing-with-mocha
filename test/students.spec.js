@@ -18,4 +18,13 @@ describe("Student", () => {
       expect(newStd.getAge()).to.be.equal(20);
     });
   });
+  describe("Grow student", () => {
+    it("Should be grow with one year", (done) => {
+      const student = new Student("Hey", "Bum");
+      student.makeApoint(function (age) {
+        expect(age).to.be.equal(19);
+        done();
+      });
+    });
+  });
 });

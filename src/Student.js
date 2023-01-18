@@ -10,4 +10,10 @@ export default class Student {
   getAge() {
     return this.age;
   }
+  makeApoint(cb) {
+    setTimeout(() => {
+      this.age++;
+      cb(this.age);
+    }, 1000);
+  }
 }
