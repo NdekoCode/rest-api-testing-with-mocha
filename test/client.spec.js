@@ -3,7 +3,7 @@ import Client from "../src/Client.js";
 should();
 describe("Client", () => {
   const NUMBER_OF_PAGE = 10;
-  const client = new Client();
+  const client = new Client(NUMBER_OF_PAGE);
   it("Should allow me to get a page", () => {
     const response = client.getPage(1);
     response.header.should.have.property("pageNumber", 1);
