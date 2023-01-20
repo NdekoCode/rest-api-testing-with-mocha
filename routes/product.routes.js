@@ -3,6 +3,9 @@ import ProductController from "../controllers/ProductController.js";
 const productRouter = Router();
 
 const productCTRL = new ProductController();
+productCTRL.getProducts = productCTRL.getProducts.bind(productCTRL);
+productCTRL.getProductsInStock =
+  productCTRL.getProductsInStock.bind(productCTRL);
 // -- CRUD Operations
 
 // /api/v1/products
@@ -12,6 +15,10 @@ productRouter.post("/", productCTRL.postProduct);
 // /api/v1/products
 // Read all products -- GET
 productRouter.get("/", productCTRL.getProducts);
+
+// /api/v1/products/inStock
+// Read all products inStock -- GET
+productRouter.get("/inStock", productCTRL.getProductsInStock);
 
 // /api/v1/products/:id
 // Read specific product -- GET

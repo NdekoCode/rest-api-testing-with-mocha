@@ -7,7 +7,7 @@ export default class Alert {
   /**
    * @param {object} otherData
    */
-  set otherData(otherData) {
+  setOtherData(otherData) {
     this.otherData = otherData;
   }
   /**

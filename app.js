@@ -13,6 +13,8 @@ app.use(
 );
 const { home } = new MainController();
 // ROUTES
-app.use(BASE_API, home);
+// POST, GET, DELETE --> CRUD
 app.use(BASE_API + "/products", productRouter);
+app.use(BASE_API, home);
+
 export default app;
