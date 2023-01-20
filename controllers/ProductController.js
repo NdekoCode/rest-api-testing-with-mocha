@@ -81,7 +81,19 @@ export default class ProductController {
    * @param {IncomingMessage} req
    * @param {ServerResponse} res
    */
-  async getSingleProduct(req, res) {}
+  async getSingleProduct(req, res) {
+    const id = req.params.id;
+    const alert = new Alert(req, res);
+    try {
+      const product = await ProductModel.findById(id);
+      if (product) {
+        return res.status(200).json(product);
+      }
+      return alert.danger("Ce produit est introuvable", 404);
+    } catch (error) {
+      return alert.danger(error.message, 500);
+    }
+  }
 
   /**
    * Modifie un produits dans la base de données
