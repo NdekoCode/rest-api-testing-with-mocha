@@ -101,7 +101,22 @@ export default class ProductController {
    * @param {IncomingMessage} req
    * @param {ServerResponse} res
    */
-  async updateProduct(req, res) {}
+  async updateProduct(req, res) {
+    const alert = new Alert(req, res);
+    const id = req.params.id;
+    const bodyRequest = { ...req.body };
+    try {
+      if (bodyRequest) {
+        const product = await ProductModel.findByIdAndUpdate(id, bodyRequest);
+        if (product) {
+          return alert.success("Product was successfully updated", 201);
+        }
+        return alert.danger("Erreur lors de la suppression du produit", 500);
+      }
+    } catch (error) {
+      return alert.danger(error.message, 500);
+    }
+  }
 
   /**
    * Supprime un produits dans la base de données
