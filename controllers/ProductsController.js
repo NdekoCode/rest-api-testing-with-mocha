@@ -1,7 +1,7 @@
 import ProductModel from "../models/ProductModel.js";
 import Alert from "../utils/Alert.js";
 
-export default class ProductController {
+export default class ProductsController {
   /**
    * Recupère les produits dans la base de données
    * @param {IncomingMessage} req
