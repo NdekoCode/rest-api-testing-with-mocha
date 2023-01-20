@@ -109,5 +109,15 @@ export default class ProductController {
    * @param {IncomingMessage} req
    * @param {ServerResponse} res
    */
-  async deleteProduct(req, res) {}
+  async deleteProduct(req, res) {
+    const id = req.params.id;
+    const alert = new Alert(req, res);
+    const product = await ProductModel.findById(id);
+    if (product) {
+      await ProductModel.findByIdAndDelete(id);
+      return alert.success("Article supprimer avec succés", 202);
+    }
+
+    return alert.success("Verifier vos information avant suppression", 404);
+  }
 }
