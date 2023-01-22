@@ -5,10 +5,10 @@ console.log(UserModel);
 const authRouter = Router();
 const usersCTRL = new UsersController();
 
-// Registration
+// Registration --- api/v1/user/register
 authRouter.post("/register", usersCTRL.register);
 
-// Login
+// Login  --- api/v1/user/login
 authRouter.post("/login", usersCTRL.login);
 
 export default authRouter;
