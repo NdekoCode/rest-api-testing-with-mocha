@@ -19,9 +19,14 @@ export default class Alert {
    * @returns
    */
   makeAlert(message, statusCode, type) {
+    let data = {};
+    if (statusCode >= 400 && statusCode <= 500) {
+      data = { error: message };
+    } else {
+      data = { error: null, message };
+    }
     return this.res.status(statusCode).json({
-      alert: { message, statusCode, type },
-      ...this.otherData,
+      alert: { ...data, statusCode, type, ...this.otherData },
     });
   }
 
@@ -33,7 +38,7 @@ export default class Alert {
    * @param {string} type le type d'alerte
    * @returns
    */
-  danger(message, statusCode = 400, type = "danger") {
+  danger(message = "", statusCode = 400, type = "danger") {
     return this.makeAlert(message, statusCode, type);
   }
 
