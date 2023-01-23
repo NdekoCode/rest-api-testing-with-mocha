@@ -1,6 +1,6 @@
 import { should } from "chai";
 import { describe, it } from "mocha";
-import ClientAsync from "../src/ClientAsync.js";
+import ClientAsync from "../../src/ClientAsync.js";
 should();
 describe("Client Async", () => {
   const NUMBER_OF_PAGE = 10;

@@ -1,6 +1,6 @@
 import { expect, should } from "chai";
 import { describe, it } from "mocha";
-import Student from "../src/Student.js";
+import Student from "../../src/Student.js";
 
 should();
 
