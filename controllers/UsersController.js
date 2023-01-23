@@ -1,4 +1,4 @@
-import { genSalt, hash } from "bcrypt";
+import { compare, genSalt, hash } from "bcrypt";
 import UserModel from "../models/UserModel.js";
 import Alert from "../utils/Alert.js";
 import { loginValidation, registerValidation } from "../utils/validation.js";
@@ -54,6 +54,10 @@ export default class UsersController {
       return alert.danger("Email ou mot de passe incorrect");
     }
     // User exists --- Check if his password is correct
+    const validPassword = await compare(bodyRequest.password, user.password);
+    if (!validPassword) {
+      return alert.danger("Email ou mot de passe incorrect");
+    }
     // create a authentication TOKEN With username, email and id
     // Attach auth token to header
     return alert.success("Utilisateur connecter");
