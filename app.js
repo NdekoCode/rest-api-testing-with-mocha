@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
+import swaggerUI from "swagger-ui-express";
+import yamljs from "yamljs";
 import MainController from "./controllers/MainController.js";
 import authRouter from "./routes/auth.routes.js";
 import productRouter from "./routes/product.routes.js";
@@ -11,6 +13,12 @@ app.use(
   express.urlencoded({
     extended: true,
   })
+);
+const swaggerDefinition = yamljs.load("./swagger.yaml");
+app.use(
+  BASE_API + "/docs",
+  swaggerUI.serve,
+  swaggerUI.setup(swaggerDefinition)
 );
 const { home } = new MainController();
 // ROUTES
