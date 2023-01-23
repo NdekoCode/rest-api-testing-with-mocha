@@ -1,7 +1,7 @@
 import { genSalt, hash } from "bcrypt";
 import UserModel from "../models/UserModel.js";
 import Alert from "../utils/Alert.js";
-import { registerValidation } from "../utils/validation.js";
+import { loginValidation, registerValidation } from "../utils/validation.js";
 
 export default class UsersController {
   async register(req, res) {
@@ -39,12 +39,23 @@ export default class UsersController {
   }
   async login(req, res) {
     // Validate user input(name, email, password)
+    const alert = new Alert(req, res);
+    const bodyRequest = req.body;
+    const { error } = loginValidation(bodyRequest);
+
     // Validate user login info
+    if (error) {
+      alert.setOtherData({ message: error.details[0].message });
+      return alert.danger("Erreur lors de la connexion de l'utilisateur");
+    }
+    const user = await findOne({ email: bodyRequest.email });
     // throw error if email is wrong (user does not exist in DB)
+    if (!user) {
+      return alert.danger("Email ou mot de passe incorrect");
+    }
     // User exists --- Check if his password is correct
     // create a authentication TOKEN With username, email and id
     // Attach auth token to header
-    const alert = new Alert(req, res);
     return alert.success("Utilisateur connecter");
   }
 }
