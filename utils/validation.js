@@ -1,4 +1,6 @@
 import Joi from "joi";
+
+// validation registration
 export const registerValidation = (data) => {
   const Schema = Joi.object({
     name: Joi.string().min(6).max(150).required(),
@@ -7,8 +9,13 @@ export const registerValidation = (data) => {
   });
   return Schema.validate(data);
 };
-// validation registration
 
 // validation login
-
+export const loginValidation = (data) => {
+  const Schema = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().required().min(6).max(255),
+  });
+  return Schema.validate(data);
+};
 // logic to verify our token

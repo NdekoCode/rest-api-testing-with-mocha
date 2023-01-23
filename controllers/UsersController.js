@@ -39,9 +39,11 @@ export default class UsersController {
   }
   async login(req, res) {
     // Validate user input(name, email, password)
-    // check if the email is exist in DB
-    // verify if the password is correct
-    // create a user TOKEN VALIDATION
+    // Validate user login info
+    // throw error if email is wrong (user does not exist in DB)
+    // User exists --- Check if his password is correct
+    // create a authentication TOKEN With username, email and id
+    // Attach auth token to header
     const alert = new Alert(req, res);
     return alert.success("Utilisateur connecter");
   }
