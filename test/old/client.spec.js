@@ -1,6 +1,6 @@
 import { should } from "chai";
 import { describe, it } from "mocha";
-import Client from "../src/Client.js";
+import Client from "../../src/Client.js";
 should();
 describe("Client", () => {
   const NUMBER_OF_PAGE = 10;
