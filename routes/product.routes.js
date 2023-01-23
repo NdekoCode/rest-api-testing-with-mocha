@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ProductsController from "../controllers/ProductsController.js";
+import verifyAuthMid from "../middlewares/auth.mid.js";
 const productRouter = Router();
 
 const productsCTRL = new ProductsController();
@@ -10,7 +11,7 @@ productsCTRL.getProductsInStock =
 
 // /api/v1/products
 // Create product - POST
-productRouter.post("/", productsCTRL.postProduct);
+productRouter.post("/", verifyAuthMid, productsCTRL.postProduct);
 
 // /api/v1/products
 // Read all products -- GET
@@ -26,10 +27,10 @@ productRouter.get("/:id", productsCTRL.getSingleProduct);
 
 // /api/v1/products/:id
 // UPDATE specific product -- PUT
-productRouter.put("/:id", productsCTRL.updateProduct);
+productRouter.put("/:id", verifyAuthMid, productsCTRL.updateProduct);
 
 // /api/v1/products/:id
 // DELETE specific product -- PUT
-productRouter.delete("/:id", productsCTRL.deleteProduct);
+productRouter.delete("/:id", verifyAuthMid, productsCTRL.deleteProduct);
 
 export default productRouter;
