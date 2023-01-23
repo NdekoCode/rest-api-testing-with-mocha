@@ -49,43 +49,47 @@ export default class UsersController {
       alert.setOtherData({ message: error.details[0].message });
       return alert.danger("Erreur lors de la connexion de l'utilisateur");
     }
-    const user = await findOne({ email: bodyRequest.email });
-    // throw error if email is wrong (user does not exist in DB)
-    if (!user) {
-      return alert.danger("Email ou mot de passe incorrect");
-    }
-    // User exists --- Check if his password is correct
-    const validPassword = await compare(bodyRequest.password, user.password);
-    if (!validPassword) {
-      return alert.danger("Email ou mot de passe incorrect");
-    }
-    const TOKEN_SECRET = process.env.TOKEN_SECRET;
-    const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN;
-    const payload = {
-      name: user.name,
-      id: user._id,
-    };
-    const expiresToken = {
-      expiresIn: JWT_EXPIRES_IN,
-    };
-    // create a authentication TOKEN With username, email and id
-    const token = jwt.sign(
-      // Payload
-      payload,
-      // Secret Key
-      TOKEN_SECRET,
-      // EXPIRATION TIME
-      expiresToken
-    );
+    try {
+      const user = await UserModel.findOne({ email: bodyRequest.email });
+      // throw error if email is wrong (user does not exist in DB)
+      if (!user) {
+        return alert.danger("Email ou mot de passe incorrect");
+      }
+      // User exists --- Check if his password is correct
+      const validPassword = await compare(bodyRequest.password, user.password);
+      if (!validPassword) {
+        return alert.danger("Email ou mot de passe incorrect");
+      }
+      const TOKEN_SECRET = process.env.TOKEN_SECRET;
+      const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN;
+      const payload = {
+        name: user.name,
+        id: user._id,
+      };
+      const expiresToken = {
+        expiresIn: JWT_EXPIRES_IN,
+      };
+      // create a authentication TOKEN With username, email and id
+      const token = jwt.sign(
+        // Payload
+        payload,
+        // Secret Key
+        TOKEN_SECRET,
+        // EXPIRATION TIME
+        expiresToken
+      );
 
-    // Attach auth token to header
-    return res.header("auth-token", token).json({
-      alert: {
-        statusCode: 200,
-        error: null,
-        token,
-        type: "success",
-      },
-    });
+      // Attach auth token to header
+      return res.header("auth-token", token).json({
+        alert: {
+          statusCode: 200,
+          error: null,
+          token,
+          type: "success",
+        },
+      });
+    } catch (error) {
+      return alert.danger(error.message);
+    }
   }
 }
