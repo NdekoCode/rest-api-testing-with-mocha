@@ -15,6 +15,8 @@ app.use(
     extended: true,
   })
 );
+const { home } = new MainController();
+
 // On configure la documentation de l'API
 const swaggerDefinition = yamljs.load("./swagger.yaml");
 
@@ -23,7 +25,6 @@ app.use(
   swaggerUI.serve,
   swaggerUI.setup(swaggerDefinition)
 );
-const { home } = new MainController();
 
 // ROUTES
 // POST, GET, DELETE --> CRUD

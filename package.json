@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha --timeout 5000 --require @babel/register test/*.js --watch",
+    "test": "NODE_ENV=test mocha --timeout 5000 --require @babel/register test/*.js",
     "start": "nodemon server.js"
   },
   "keywords": [],
@@ -23,9 +23,7 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "mocha": "^10.2.0",
-    "swagger-ui-express": "^4.6.0",
-    "yamljs": "^0.3.0"
+    "mocha": "^10.2.0"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -35,6 +33,8 @@
     "joi": "^17.7.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.4",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "swagger-ui-express": "^4.6.0",
+    "yamljs": "^0.3.0"
   }
 }
