@@ -1,4 +1,5 @@
 import { compare, genSalt, hash } from "bcrypt";
+import jwt from "jsonwebtoken";
 import UserModel from "../models/UserModel.js";
 import Alert from "../utils/Alert.js";
 import { loginValidation, registerValidation } from "../utils/validation.js";
@@ -58,8 +59,33 @@ export default class UsersController {
     if (!validPassword) {
       return alert.danger("Email ou mot de passe incorrect");
     }
+    const TOKEN_SECRET = process.env.TOKEN_SECRET;
+    const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN;
+    const payload = {
+      name: user.name,
+      id: user._id,
+    };
+    const expiresToken = {
+      expiresIn: JWT_EXPIRES_IN,
+    };
     // create a authentication TOKEN With username, email and id
+    const token = jwt.sign(
+      // Payload
+      payload,
+      // Secret Key
+      TOKEN_SECRET,
+      // EXPIRATION TIME
+      expiresToken
+    );
+
     // Attach auth token to header
-    return alert.success("Utilisateur connecter");
+    return res.header("auth-token", token).json({
+      alert: {
+        statusCode: 200,
+        error: null,
+        token,
+        type: "success",
+      },
+    });
   }
 }
