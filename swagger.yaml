@@ -91,10 +91,17 @@ paths:
               schema:
                 type: object
                 properties:
-                  error:
-                    type: string
-                  data:
-                    type: string
+                  alert:
+                    type: object
+                    properties:
+                      statusCode:
+                        type: number
+                      error:
+                        type: string|null
+                      token:
+                        type: string
+                      type:
+                        type: string
 
   /products:
     get:
