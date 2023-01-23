@@ -4,10 +4,14 @@ const userSchema = new Schema(
     name: {
       type: String,
       required: true,
+      min: 3,
+      max: 150,
     },
     email: {
       type: String,
       required: true,
+      min: 10,
+      max: 255,
     },
     password: {
       min: 6,

@@ -8,7 +8,7 @@ export default function dbConnect(app) {
   })
     .then(() => {
       console.log("Connected to MongoDB...");
-      const PORT = process.env.PORT || 3500;
+      const PORT = process.env.PORT || 4000;
       app.set("port", PORT);
       app.listen(PORT, () => {
         console.log("Server is listening at " + PORT);
