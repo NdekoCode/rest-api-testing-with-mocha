@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require @babel/register --recursive --exit --timeout 200000",
+    "test": "mocha --require @babel/register --recursive --exit --timeout 20000",
     "start": "nodemon server.js"
   },
   "keywords": [],
