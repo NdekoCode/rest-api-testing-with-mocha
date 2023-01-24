@@ -11,7 +11,7 @@ productsCTRL.getProductsInStock =
 
 // /api/v1/products
 // Create product - POST
-productRouter.post("/", productsCTRL.postProduct);
+productRouter.post("/", verifyAuthMid, productsCTRL.postProduct);
 
 // /api/v1/products
 // Read all products -- GET
