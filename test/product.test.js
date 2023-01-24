@@ -10,10 +10,10 @@ before((done) => {
   ProductModel.deleteMany({}, (err) => {});
   done();
 });
-/* after((done) => {
+after((done) => {
   ProductModel.deleteMany({}, (err) => {});
   done();
-}); */
+});
 describe("/FIRST TEST collection", () => {
   it("It should allow me to go to the main page", (done) => {
     request.get(BASE_API).end((err, res) => {

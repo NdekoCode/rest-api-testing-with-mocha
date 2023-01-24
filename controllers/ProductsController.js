@@ -42,10 +42,8 @@ export default class ProductsController {
           description,
         });
         if (modelFindProduct) {
-          console.log("Product Exist", dataRequest);
           return alert.danger("Le produit existe déjà", 409);
         }
-        console.log("Processing Save", dataRequest);
         const data = await ProductModel.insertMany(dataRequest);
         return res.status(201).send(data);
       }
