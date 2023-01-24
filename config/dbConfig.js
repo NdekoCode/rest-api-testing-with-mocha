@@ -1,20 +1,21 @@
-import { connect, set } from "mongoose";
-export default function dbConnect(app) {
-  const DB_URL = process.env.DB_URL;
+import mongoose, { set } from "mongoose";
+export default function dbConnect() {
+  const DB_URL = process.env.DB_URL_TEST;
   set("strictQuery", true);
-  connect(DB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  mongoose
+    .connect(DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
     .then(() => {
       console.log("Connected to MongoDB...");
-      const PORT = process.env.PORT || 4000;
-      app.set("port", PORT);
-      app.listen(PORT, () => {
-        console.log("Server is listening at " + PORT);
-      });
     })
     .catch((err) => {
       console.error("Could not connect to MongoDB...", err.message);
     });
+
+  mongoose.Promise = global.Promise;
+  mongoose.connection.on("error", (err) => {
+    console.log("Error on database", err.message);
+  });
 }

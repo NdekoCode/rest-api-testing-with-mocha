@@ -1,3 +1,7 @@
 import app from "./app.js";
-import dbConnect from "./config/dbConfig.js";
-dbConnect(app);
+
+const PORT = process.env.PORT || 4000;
+app.set("port", PORT);
+app.listen(PORT, () => {
+  console.log("Server is listening at " + PORT);
+});
