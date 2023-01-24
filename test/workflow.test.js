@@ -15,7 +15,21 @@ describe("User workflow tests", (done) => {
         expect(res.status).to.be.equal(201);
         expect(res.body).to.be.a("object");
         expect(res.body.alert.error).to.be.equal(null);
-        done();
+
+        // Login User
+        request
+          .post(BASE_API + "/user/login")
+          .send({
+            email: user.email,
+            password: user.password,
+          })
+          .then((res) => {
+            expect(res.status).to.be.equal(200);
+            expect(res.body.alert.error).to.be.equal(null);
+          })
+          .catch((err) => {
+            throw err;
+          });
       })
       .catch((err) => {
         done();
