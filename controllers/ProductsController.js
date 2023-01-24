@@ -26,6 +26,7 @@ export default class ProductsController {
   async postProduct(req, res) {
     const alert = new Alert(req, res);
     const dataRequest = req.body;
+
     try {
       if (
         typeof dataRequest[Symbol.iterator] === "function" &&
@@ -41,14 +42,17 @@ export default class ProductsController {
           description,
         });
         if (modelFindProduct) {
+          console.log("Product Exist", dataRequest);
           return alert.danger("Le produit existe déjà", 409);
         }
+        console.log("Processing Save", dataRequest);
         const data = await ProductModel.insertMany(dataRequest);
         return res.status(201).send(data);
       }
 
       return alert.danger("Veuillez remplir ces informations", 401);
     } catch (error) {
+      console.log(error);
       return alert.danger(error.message, 500);
     }
   }
