@@ -1,6 +1,6 @@
-import { BASE_API } from "../../utils/constants.js";
-import request from "../setup.test.js";
-describe("User workflow tests", (done) => {
+import { BASE_API } from "../utils/constants.js";
+import request from "./setup.test.js";
+describe("All workflow User tests", (done) => {
   it("Should Register user + Login, Create product and verify 1 in DATABASE", () => {
     const user = {
       name: "Arick Bulakali",
