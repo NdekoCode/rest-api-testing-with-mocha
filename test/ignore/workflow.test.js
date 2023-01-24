@@ -1,8 +1,8 @@
-import { BASE_API } from "../utils/constants.js";
-import request from "./setup.test.js";
+import { BASE_API } from "../../utils/constants.js";
+import request from "../setup.test.js";
 describe("User workflow tests", (done) => {
   it("Should Register user + Login, Create product and verify 1 in DATABASE", () => {
-    let user = {
+    const user = {
       name: "Arick Bulakali",
       email: "arickwalcott@gmail.com",
       password: "123456",
