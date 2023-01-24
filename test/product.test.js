@@ -1,19 +1,7 @@
-import chai, { expect } from "chai";
-import chaiHttp from "chai-http";
-import { before, describe, it } from "mocha";
-import server from "../app.js";
-import ProductModel from "../models/ProductModel.js";
+import { expect } from "chai";
+import { describe, it } from "mocha";
 import { BASE_API } from "../utils/constants.js";
-chai.use(chaiHttp);
-const request = chai.request(server).keepOpen();
-before((done) => {
-  ProductModel.deleteMany({}, (err) => {});
-  done();
-});
-after((done) => {
-  ProductModel.deleteMany({}, (err) => {});
-  done();
-});
+import request from "./setup.test.js";
 describe("/FIRST TEST collection", () => {
   it("It should allow me to go to the main page", (done) => {
     request.get(BASE_API).end((err, res) => {
