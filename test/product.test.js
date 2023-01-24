@@ -43,4 +43,19 @@ describe("/FIRST TEST collection", () => {
         throw err;
       });
   });
+
+  // Help us to check how many product we have in the database
+  it("Should verify that we have 1 products in the DB", (done) => {
+    request
+      .get(BASE_API + "/products")
+      .then((res) => {
+        expect(res.status).to.be.equal(200);
+        expect(res.body).to.be.a("array").with.lengthOf(1);
+        done();
+      })
+      .catch((err) => {
+        done();
+        throw err;
+      });
+  });
 });
