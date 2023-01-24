@@ -48,6 +48,18 @@ describe("User workflow tests", (done) => {
                 );
                 expect(saveProduct.price).to.be.equal(product.price);
                 expect(saveProduct.inStock).to.be.equal(product.inStock);
+                request
+                  .get(BASE_API + "/products")
+                  .then((res) => {
+                    expect(res.status).to.be.equal(200);
+                    expect(res.body).to.be.a("array");
+                    expect(res.body.length).to.be.eql(1);
+                    done();
+                  })
+                  .catch((err) => {
+                    done();
+                    throw err;
+                  });
               })
               .catch((err) => {
                 done();
