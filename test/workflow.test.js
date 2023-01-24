@@ -40,6 +40,14 @@ describe("User workflow tests", (done) => {
               .then((res) => {
                 expect(res.status).to.be.equal(201);
                 expect(res.body).to.be.a("array");
+                expect(res.body.length).to.be.eql(1);
+                const saveProduct = res.body[0];
+                expect(saveProduct.title).to.be.equal(product.name);
+                expect(saveProduct.description).to.be.equal(
+                  product.description
+                );
+                expect(saveProduct.price).to.be.equal(product.price);
+                expect(saveProduct.inStock).to.be.equal(product.inStock);
               })
               .catch((err) => {
                 done();
