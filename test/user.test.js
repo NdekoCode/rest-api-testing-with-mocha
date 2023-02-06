@@ -1,10 +1,11 @@
 import { BASE_API } from "../utils/constants.js";
 import request from "./setup.test.js";
-describe("User workflow", (done) => {
+describe("User workflow", () => {
+  let i = 1;
   it("Should Register user in DATABASE", (done) => {
     let user = {
       name: "Arick Bulakali",
-      email: "arickwalcott@gmail.com",
+      email: "arick" + i + "@gmail.com",
       password: "123456",
     };
 
@@ -17,6 +18,7 @@ describe("User workflow", (done) => {
         expect(res.body).to.be.a("object");
         expect(res.body.alert.error).to.be.equal(null);
         done();
+        i++;
       })
       .catch((err) => {
         done();

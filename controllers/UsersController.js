@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 import UserModel from "../models/UserModel.js";
 import Alert from "../utils/Alert.js";
 import { loginValidation, registerValidation } from "../utils/validation.js";
-
 export default class UsersController {
   async register(req, res) {
     const alert = new Alert(req, res);
@@ -32,7 +31,7 @@ export default class UsersController {
       // create a user objet and save in the DB
       const user = UserModel(bodyRequest);
       await user.save();
-      return alert.success("Utilisateur enregister avec success");
+      return alert.success("Utilisateur enregister avec success", 201);
     } catch (error) {
       console.log(error);
       return alert.danger(error.message, 500);
